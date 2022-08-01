@@ -1,4 +1,20 @@
-# react-todolist-5x
+# react-try-pagination
+
+## TODO
+
+- [ ] notes
+
+---
+
+## NOTES
+
+├── App
+    └── ListData
+        ├── ListItem
+        └── PaginationBar
+            └── PageButton
+
+---
 
 - **template of:** vite + react
 - **tailwindcss:** v3.x
@@ -30,7 +46,7 @@ yarn build
 
 ---
 
-![Powered-by-Vitawind](./powered-by-vitawind-bright.png)
+![Powered-by-Vitawind](./src/images/powered-by-vitawind-bright.png)
 
 <!-- <p align="center">
   <img src="./powered-by-vitawind-bright.png">
