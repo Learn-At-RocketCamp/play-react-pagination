@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import PageButton from "./PageButton";
+import PaginationButton from './PaginationButton';
 
 const createPages = (pagesCount) => {
   return [...Array(pagesCount).keys()];
 };
+/* end of createPages(pagesCount) */
 
 function PaginationBar(props) {
   const { dataCount, setClickPage } = props;
 
   const [pagesCount, setPagesCount] = useState([1]);
-  console.log(dataCount);
-  console.log(pagesCount);
+  // console.log(dataCount, pagesCount);
 
   // #TODO: isLoading
   useEffect(() => {
@@ -23,17 +23,21 @@ function PaginationBar(props) {
   return (
     <ul className="flex">
       {pagesCount.map((pageNum, i) => {
+        const pageString = pageNum + 1;
+        // console.log('pageString', pageString);
+
         return (
-          <PageButton key={i} pageNum={pageNum} setClickPage={setClickPage} />
+          <PaginationButton
+            key={i}
+            pageString={pageString}
+            pageNum={pageNum}
+            setClickPage={setClickPage}
+          />
         );
       })}
-      {/* {totalPages.map((pageNum, i) => {
-        return (
-          <PageButton key={i} pageNum={pageNum} setClickPage={setClickPage} />
-        );
-      })} */}
     </ul>
   );
 }
+/* end of PaginationBar() */
 
 export default PaginationBar;

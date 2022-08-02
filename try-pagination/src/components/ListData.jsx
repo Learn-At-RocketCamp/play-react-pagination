@@ -3,37 +3,56 @@ import React, { useEffect, useState } from 'react';
 import ListItem from './ListItem';
 import PaginationBar from './PaginationBar';
 
-const sliceData = (data, currentPage) => {
-  console.log('slice:', currentPage);
-  return [...data].slice(currentPage, currentPage + 2) || ['loading...'];
+const sliceData = (data, currentPageIndex = 0) => {
+  console.log('slice-data-currentPageIndex:', data, currentPageIndex);
+
+  return [...data].slice(currentPageIndex, currentPageIndex + 2);
 };
+/* end of sliceData(data, currentPage) */
 
 function ListData(props) {
   const { data } = props;
+
   const [clickPage, setClickPage] = useState(0);
 
-  // const [partData, setPartData] = useState([]);
-  const [partData, setPartData] = useState(() => {
-    return sliceData(data, clickPage * 2);
-  });
+  const [partData, setPartData] = useState([]);
+  /**
+   * #NOTE: render-issue
+   * - `[]` === `true`
+   */
+  // const [partData, setPartData] = useState([{title: 'loading...'}]);
+  // const [partData, setPartData] = useState(() => {
+  //   return sliceData(data, clickPage * 2);
+  // });
+  // console.log('part-length::', partData.length);
+  // console.log(Boolean(partData));
+  // console.log(Boolean([]));
 
   useEffect(() => {
-    if (data) {
-      const currentPage = clickPage * 2;
+    const currentPageIndex = clickPage * 2;
 
-      setPartData(() => {
-        return sliceData(data, currentPage);
-      });
-    }
-    // #NOTE: MUST have data or nothing at first
+    setPartData(() => {
+      return sliceData(data, currentPageIndex);
+    });
+
+    // if (data) {
+    //   const currentPage = clickPage * 2;
+
+    //   setPartData(() => {
+    //     return sliceData(data, currentPage);
+    //   });
+    // }
+    /**
+     * #NOTE: render-issue
+     * - ANS: MUST have [data] or nothing at first
+     */
   }, [data, clickPage]);
 
   return (
-    <main className="flex flex-col items-center">
-      <h3 className="text-lg font-bold">This is List.</h3>
-      <hr className="h-1 bg-slate-300" />
+    <section className="flex flex-col items-center p-2">
+      <p className="text-lg font-bold">This is A List.</p>
 
-      <ul>
+      <ul className="py-2">
         {partData.map((item) => {
           return <ListItem key={item.id} item={item} />;
         })}
@@ -46,10 +65,9 @@ function ListData(props) {
           // totalPages={totalPages}
         />
       </nav>
-
-      <hr className="h-2 bg-slate-300" />
-    </main>
+    </section>
   );
 }
+/* end of ListData() */
 
 export default ListData;

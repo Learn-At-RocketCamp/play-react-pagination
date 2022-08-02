@@ -2,29 +2,25 @@ import React, { useEffect, useState } from 'react';
 
 import ListData from './components/ListData';
 
-// import logo from './images/logo.svg';
-// import poweredBy from './images/powered-by-vitawind-dark.png';
-
-import mockUsers from './users.json';
-import mockCarts from './carts.json';
+import mockUsers from './services/users.json';
+import mockCarts from './services/carts.json';
+/* end of definition */
 
 const fetchData = async () => {
   // const response = await fetch('https://jsonplaceholder.typicode.com/users');
   // return await response.json();
   return mockUsers;
 };
-
 const fetchCartsData = async () => {
   // const response = await fetch('https://jsonplaceholder.typicode.com/users');
   // return await response.json();
   return mockCarts;
 };
+/* end of fetch() */
 
 function App() {
   const [usersData, setUsersData] = useState([]);
   const [cartsData, setCartsData] = useState([]);
-
-  const [clickPage, setClickPage] = useState(0);
 
   useEffect(() => {
     fetchData().then((result) => {
@@ -34,16 +30,21 @@ function App() {
     fetchCartsData().then((result) => {
       setCartsData(result);
     });
-  }, [clickPage]);
+  }, []);
 
   return (
-    <div className="text-center selection:bg-green-900">
+    <div className="text-center selection:bg-yellow-100">
+      <div className="container mx-auto p-2">
+
       <ListData data={usersData} />
 
-      <hr className="h-2 bg-slate-300" />
+      <hr className="h-1 bg-slate-300" />
+
       <ListData data={cartsData} />
+      </div>
     </div>
   );
 }
+/* end of App() */
 
 export default App;

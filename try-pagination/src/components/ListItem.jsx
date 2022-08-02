@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 function ListItem(props) {
   // function ListItem({ item: { name } }) {
@@ -13,5 +13,6 @@ function ListItem(props) {
     </li>
   );
 }
+/* end of ListItem() */
 
 export default ListItem;
